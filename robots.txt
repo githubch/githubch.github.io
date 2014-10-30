@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://githubch.github.io/sitemap.xml 
