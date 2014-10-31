@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>天下</title>
+  <title>C++ 设计之单例模式 - 天下</title>
   <meta name="author" content="宏">
 
   
@@ -25,7 +25,7 @@ Singleton &amp; Singleton::GetInstance()
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://githubch.github.io">
+  <link rel="canonical" href="http://githubch.github.io/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="天下" type="application/atom+xml">
@@ -70,15 +70,12 @@ Singleton &amp; Singleton::GetInstance()
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi/">C++ 设计之单例模式</a></h1>
+      <h1 class="entry-title">C++ 设计之单例模式</h1>
     
     
       <p class="meta">
@@ -94,7 +91,7 @@ Singleton &amp; Singleton::GetInstance()
   </header>
 
 
-  <div class="entry-content"><p>优点：
+<div class="entry-content"><p>优点：
 适用于全局变量、以及管理器类
 缺点：
 有可能在api中引入难以重构的全局状态和依赖项
@@ -136,100 +133,52 @@ return *instance;
 2、如果不想让对象不能复制，以确保不能创建第二个实例，也可以声明私有复制构造函数和私有赋值操作符
 3、如果要禁止客户删除实例，可以声明私有虚构函数</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
+  
+
+<span class="byline author vcard">Posted by <span class="fn">宏</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-10-31T15:43:48+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>3:43 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/api/'>api</a>, <a class='category' href='/blog/categories/c-plus-plus/'>c++</a>, <a class='category' href='/blog/categories/design/'>design</a>
+  
+</span>
+
+
+    </p>
     
-      <h1 class="entry-title"><a href="/blog/2014/10/31/sql-2008-restore-database-with-cluster/">Sql 2008 Restore Database With Cluster</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-10-31T11:30:52+08:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>11:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Error: &lsquo;Cannot use file &rsquo;<path>.mdf&#8217; for clustered server. Only formatted files on which the cluster resource of the server has a dependency can be used</p>
-
-<p>Skip to end of metadata Go to start of metadata
-KB# 3337</p>
-
-<p>SYMPTOM:</p>
-
-<p>When attempting to restore to a SQL Server cluster, you get an error like the following:</p>
-
-<p>Server instance: SQLCLUSTER, Database: Database</p>
-
-<p>Msg 5184, Level 16, State 2, Server SQLCLUSTER, Line 1</p>
-
-<p>Cannot use file &rsquo;M:\MSSQL.1\MSSQL\SQLDataFiles\Database_Data.mdf&#8217; for clustered server. Only formatted files on which the cluster resource of the server has a dependency can be used.</p>
-
-<p>Msg 3156, Level 16, State 3, Server SQLCLUSTER, Line 1</p>
-
-<p>File &lsquo;Database&rsquo; cannot be restored to &rsquo;M:\MSSQL.1\MSSQL\SQLDataFiles\Database_Data.mdf&#8217;. Use WITH MOVE to identify a valid location for the file.</p>
-
-<p>Msg 3119, Level 16, State 1, Server SQLCLUSTER, Line 1</p>
-
-<p>Problems were identified while planning for the RESTORE statement. Previous messages provide details.</p>
-
-<p>Msg 3013, Level 16, State 1, Server SQLCLUSTER, Line 1</p>
-
-<p>RESTORE DATABASE is terminating abnormally.</p>
-
-<p>CAUSE:</p>
-
-<p>The restore is failing because attempts are being made to place the .mdf and .ldf files on a drive which is not a drive the cluster resource group is dependent upon. SQL Server requires that all of its database files exist on drives where the cluster resource group is dependent.</p>
-
-<p>SOLUTION:</p>
-
-<p>Either of the following steps should resolve the issue:</p>
-
-<ol>
-<li>Add a dependency on this drive to the cluster resource group.</li>
-</ol>
-
-
-<p>Here is a Microsoft link that describes this issue and how to add a cluster dependency: <a href="http://support.microsoft.com/kb/295732">http://support.microsoft.com/kb/295732</a></p>
-
-<p>OR</p>
-
-<ol>
-<li>Specify WITH MOVE during the restore operation to restore these files to a drive that the cluster is dependent upon.</li>
-</ol>
-
-
-<p>If you wish to move the data and log files to a drive that is already configured as a cluster resource drive, you can use the WITH MOVE parameter in the restore command.</p>
-
-<p>If you are performing the restore from the SQL Safe Management Console, you can simply type in the new path for these files in the ‘Restore database files as’ field labeled ‘Change Path.’ Hit Apply and you will see that the target files have been updated with the new path. This will add the WITH MOVE T-SQL statement to the restore job.</p>
-
-<p>If you are using the command line or the SQL Safe Extended Stored Procedures to perform this restore, then you will want to use the –move or @move parameter, respectively, to change the destination for these files to a drive which the SQL Server instance can use.</p>
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://githubch.github.io/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi/" data-via="" data-counturl="http://githubch.github.io/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi/" >Tweet</a>
+  
+  
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/10/31/sql-2008-restore-database-with-cluster/" title="Previous Post: Sql 2008 Restore Database with cluster">&laquo; Sql 2008 Restore Database with cluster</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -253,6 +202,7 @@ KB# 3337</p>
 
   
 </aside>
+
 
     </div>
   </div>

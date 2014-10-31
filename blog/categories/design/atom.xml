@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Design | 天下]]></title>
+  <link href="http://githubch.github.io/blog/categories/design/atom.xml" rel="self"/>
+  <link href="http://githubch.github.io/"/>
+  <updated>2014-10-31T15:44:34+08:00</updated>
+  <id>http://githubch.github.io/</id>
+  <author>
+    <name><![CDATA[宏]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C++ 设计之单例模式]]></title>
+    <link href="http://githubch.github.io/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi/"/>
+    <updated>2014-10-31T15:43:48+08:00</updated>
+    <id>http://githubch.github.io/blog/2014/10/31/c-plus-plus-she-ji-zhi-dan-li-mo-shi</id>
+    <content type="html"><![CDATA[<p>优点：
+适用于全局变量、以及管理器类
+缺点：
+有可能在api中引入难以重构的全局状态和依赖项
+编写独立于代码的单元测试困难</p>
+
+<p>线程安全的单利模式：
+static Mutex mutex;
+Singleton &amp; Singleton::GetInstance()
+{
+     ScopedLock lock(&amp;mutex);
+     static Singleton instance;
+     return instance; <br/>
+}
+优化的单利实例化加锁行为：
+Singleton &amp; Singleton::GetInstance()
+{
+    static Singleton *instance = NULL;
+    if( !instance)
+    {
+          Mutex mutex;
+          ScopedLock lock(&amp;mutex);</p>
+
+<pre><code>      if( !instance)
+      {
+            instance = new Singleton();
+      }
+}
+
+return *instance;
+</code></pre>
+
+<p>}</p>
+
+<p>格外注意：
+使用C++创建线程安全的单例是困难的。可以考虑使用静态构造函数或API初始化函数对其进行初始化。</p>
+
+<p>知识拓展：
+1、如果不想让客户能够创建新的实例，可以声明私有默认构造函数
+2、如果不想让对象不能复制，以确保不能创建第二个实例，也可以声明私有复制构造函数和私有赋值操作符
+3、如果要禁止客户删除实例，可以声明私有虚构函数</p>
+]]></content>
+  </entry>
+  
+</feed>
