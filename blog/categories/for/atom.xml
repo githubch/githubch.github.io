@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[天下]]></title>
-  <link href="http://githubch.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: For | 天下]]></title>
+  <link href="http://githubch.github.io/blog/categories/for/atom.xml" rel="self"/>
   <link href="http://githubch.github.io/"/>
   <updated>2014-10-31T11:39:14+08:00</updated>
   <id>http://githubch.github.io/</id>
