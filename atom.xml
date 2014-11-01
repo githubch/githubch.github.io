@@ -4,7 +4,7 @@
   <title><![CDATA[天下]]></title>
   <link href="http://githubch.github.io/atom.xml" rel="self"/>
   <link href="http://githubch.github.io/"/>
-  <updated>2014-11-01T13:04:43+08:00</updated>
+  <updated>2014-11-01T13:08:56+08:00</updated>
   <id>http://githubch.github.io/</id>
   <author>
     <name><![CDATA[宏 hcheng@thoughtworks.com]]></name>
@@ -28,24 +28,32 @@
 
 <p>static Mutex mutex;</p>
 
-<p>Singleton &amp; Singleton::GetInstance()
-{
-     ScopedLock lock(&amp;mutex);
-     static Singleton instance;
-     return instance; <br/>
-}</p>
+<p>Singleton &amp; Singleton::GetInstance()</p>
+
+<p>{
+     ScopedLock lock(&amp;mutex);</p>
+
+<pre><code> static Singleton instance;
+
+ return instance;
+</code></pre>
+
+<p>}</p>
 
 <p>优化的单利实例化加锁行为：</p>
 
-<p>Singleton &amp; Singleton::GetInstance()
-{
-    static Singleton *instance = NULL;
-    if( !instance)
-    {
-          Mutex mutex;
-          ScopedLock lock(&amp;mutex);</p>
+<p>Singleton &amp; Singleton::GetInstance()</p>
 
-<pre><code>      if( !instance)
+<p>{
+    static Singleton *instance = NULL;</p>
+
+<pre><code>if( !instance)
+{
+      Mutex mutex;
+
+      ScopedLock lock(&amp;mutex);
+
+      if( !instance)
       {
             instance = new Singleton();
       }

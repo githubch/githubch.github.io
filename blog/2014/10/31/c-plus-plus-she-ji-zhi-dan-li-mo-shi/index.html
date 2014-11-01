@@ -13,8 +13,7 @@
 适用于全局变量、以及管理器类
 缺点：
 有可能在api中引入难以重构的全局状态和依赖项
-编写独立于代码的单元测试困难 线程安全的单利模式： static Mutex mutex; Singleton &amp; Singleton::GetInstance()
-{ ScopedLock &hellip;">
+编写独立于代码的单元测试困难 线程安全的单利模式： static Mutex mutex; Singleton &amp; Singleton::GetInstance() { ScopedLock &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -99,24 +98,32 @@
 
 <p>static Mutex mutex;</p>
 
-<p>Singleton &amp; Singleton::GetInstance()
-{
-     ScopedLock lock(&amp;mutex);
-     static Singleton instance;
-     return instance; <br/>
-}</p>
+<p>Singleton &amp; Singleton::GetInstance()</p>
+
+<p>{
+     ScopedLock lock(&amp;mutex);</p>
+
+<pre><code> static Singleton instance;
+
+ return instance;
+</code></pre>
+
+<p>}</p>
 
 <p>优化的单利实例化加锁行为：</p>
 
-<p>Singleton &amp; Singleton::GetInstance()
-{
-    static Singleton *instance = NULL;
-    if( !instance)
-    {
-          Mutex mutex;
-          ScopedLock lock(&amp;mutex);</p>
+<p>Singleton &amp; Singleton::GetInstance()</p>
 
-<pre><code>      if( !instance)
+<p>{
+    static Singleton *instance = NULL;</p>
+
+<pre><code>if( !instance)
+{
+      Mutex mutex;
+
+      ScopedLock lock(&amp;mutex);
+
+      if( !instance)
       {
             instance = new Singleton();
       }
